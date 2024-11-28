@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Мои автомобили{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Мои автомобили</h2>
+    </div>
+    {% if cars %}
+        <ul class="list-group">
+            {% for car in cars %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>{{ car.make }} {{ car.model }} ({{ car.year }})</span>
+                    <div>
+                        <a href="{{ url_for('car_edit', car_id=car.id) }}" class="btn btn-sm btn-primary">Редактировать</a>
+                        <form action="{{ url_for('car_delete', car_id=car.id) }}" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-danger">Удалить</button>
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Автомобили не найдены. Добавьте свой первый автомобиль!</p>
+    {% endif %}
+
+    <h2>Добавить новый автомобиль</h2>
+    <form method="POST" action="{{ url_for('car_list') }}">
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+            {{ form.make.label(class="form-label") }}
+            {{ form.make(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.model.label(class="form-label") }}
+            {{ form.model(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.year.label(class="form-label") }}
+            {{ form.year(class="form-control") }}
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить автомобиль</button>
+    </form>
+{% endblock %}

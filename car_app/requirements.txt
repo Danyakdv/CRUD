@@ -1,0 +1,11 @@
+Flask
+Flask-RESTful
+Flask-SQLAlchemy==2.5.1
+SQLAlchemy==1.4.36
+Flask-JWT-Extended
+Flask-Login==0.6.0
+Flask-WTF
+Flask-Bootstrap
+psycopg2-binary
+Werkzeug==2.0.2
+flask-swagger-ui
